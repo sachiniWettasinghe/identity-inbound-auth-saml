@@ -153,7 +153,7 @@ public class SAMLSSOUIUtil {
 
         if (isSpEdit) {
             if (provider != null) {
-                if(SAMLSSOProviderConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING.equals
+                if(SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING.equals
                         (provider.getFrontChannelLogoutMethod())) {
                     return true;
                 }
@@ -167,7 +167,7 @@ public class SAMLSSOUIUtil {
 
         if (isSpEdit) {
             if (provider != null) {
-                if(SAMLSSOProviderConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING.equals
+                if(SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING.equals
                         (provider.getFrontChannelLogoutMethod())) {
                     return true;
                 }

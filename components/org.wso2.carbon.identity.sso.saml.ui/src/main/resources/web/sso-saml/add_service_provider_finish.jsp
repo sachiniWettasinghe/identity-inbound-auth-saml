@@ -25,7 +25,6 @@
 <%@ page import="org.wso2.carbon.ui.CarbonUIUtil" %>
 <%@ page import="org.wso2.carbon.utils.ServerConstants" %>
 <%@ page import="java.util.ResourceBundle" %>
-<%@ page import="org.wso2.carbon.identity.sso.saml.common.SAMLSSOProviderConstants" %>
 
 <jsp:useBean id="samlSsoServuceProviderConfigBean"
              type="org.wso2.carbon.identity.sso.saml.ui.SAMLSSOProviderConfigBean"
@@ -73,17 +72,17 @@
         if ("true".equals(request.getParameter("enableSingleLogout"))) {
             serviceProviderDTO.setDoSingleLogout(true);
         }
-        if (SAMLSSOProviderConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING
+        if (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING
                 .equals(request.getParameter(SAMLSSOUIConstants.SLO_TYPE))) {
             serviceProviderDTO.setDoFrontChannelLogout(true);
             serviceProviderDTO.setFrontChannelLogoutMethod
-                    (SAMLSSOProviderConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING);
+                    (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING);
         }
-        if (SAMLSSOProviderConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING
+        if (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING
                 .equals(request.getParameter(SAMLSSOUIConstants.SLO_TYPE))) {
             serviceProviderDTO.setDoFrontChannelLogout(true);
             serviceProviderDTO.setFrontChannelLogoutMethod
-                    (SAMLSSOProviderConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING);
+                    (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING);
         }
         if ("true".equals(request.getParameter("enableResponseSignature"))) {
             serviceProviderDTO.setDoSignResponse(true);
