@@ -136,6 +136,45 @@ public class SAMLSSOUIUtil {
         return false;
     }
 
+    //Check front-Channel logout enable and if not enable return false
+    public static boolean isFrontchannelLogoutEnabled(boolean isSpEdit, SAMLSSOServiceProviderDTO provider) {
+
+        if (isSpEdit) {
+            if (provider != null) {
+                 return provider.getDoFrontChannelLogout();
+            }
+        }
+        return false;
+    }
+
+    //Check front-Channel logout HTTP Redirect Binding enable and if not enable return false
+    public static boolean isHTTPRedirectBindingEnabled(boolean isSpEdit, SAMLSSOServiceProviderDTO provider) {
+
+        if (isSpEdit) {
+            if (provider != null) {
+                if(SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING.equals
+                        (provider.getFrontChannelLogoutMethod())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //Check front-Channel logout HTTP Post Binding enable and if not enable return false
+    public static boolean isHTTPPostBindingEnabled(boolean isSpEdit, SAMLSSOServiceProviderDTO provider) {
+
+        if (isSpEdit) {
+            if (provider != null) {
+                if(SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING.equals
+                        (provider.getFrontChannelLogoutMethod())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean isAttributeProfileEnabled(boolean isSpEdit, SAMLSSOServiceProviderDTO provider) {
 
         if (isSpEdit) {

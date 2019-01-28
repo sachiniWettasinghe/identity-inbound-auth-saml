@@ -98,6 +98,18 @@
             if (StringUtils.isNotBlank(request.getParameter(SAMLSSOUIConstants.SLO_REQUEST_URL))) {
                 serviceProviderDTO.setSloRequestURL(request.getParameter(SAMLSSOUIConstants.SLO_REQUEST_URL));
             }
+            if (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING
+                    .equals(request.getParameter(SAMLSSOUIConstants.SLO_TYPE))) {
+                serviceProviderDTO.setDoFrontChannelLogout(true);
+                serviceProviderDTO.setFrontChannelLogoutMethod
+                        (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING);
+            }
+            if (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING
+                    .equals(request.getParameter(SAMLSSOUIConstants.SLO_TYPE))) {
+                serviceProviderDTO.setDoFrontChannelLogout(true);
+                serviceProviderDTO.setFrontChannelLogoutMethod
+                        (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING);
+            }
         }
 
         if (Boolean.parseBoolean(request.getParameter(SAMLSSOUIConstants.ENABLE_RESPONSE_SIGNATURE))) {

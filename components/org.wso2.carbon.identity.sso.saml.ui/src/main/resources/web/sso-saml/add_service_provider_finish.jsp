@@ -72,6 +72,18 @@
         if ("true".equals(request.getParameter("enableSingleLogout"))) {
             serviceProviderDTO.setDoSingleLogout(true);
         }
+        if (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING
+                .equals(request.getParameter(SAMLSSOUIConstants.SLO_TYPE))) {
+            serviceProviderDTO.setDoFrontChannelLogout(true);
+            serviceProviderDTO.setFrontChannelLogoutMethod
+                    (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING);
+        }
+        if (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING
+                .equals(request.getParameter(SAMLSSOUIConstants.SLO_TYPE))) {
+            serviceProviderDTO.setDoFrontChannelLogout(true);
+            serviceProviderDTO.setFrontChannelLogoutMethod
+                    (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING);
+        }
         if ("true".equals(request.getParameter("enableResponseSignature"))) {
             serviceProviderDTO.setDoSignResponse(true);
         }

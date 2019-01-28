@@ -62,6 +62,9 @@ public class SAMLSSOProviderConstants {
 
     public static final String LOGIN_PAGE = "customLoginPage";
 
+    //Front Channel Logout Methods
+
+
     private SAMLSSOProviderConstants() {
     }
 
