@@ -111,7 +111,6 @@
                         (SAMLSSOUIConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING);
             }
         }
-
         if (Boolean.parseBoolean(request.getParameter(SAMLSSOUIConstants.ENABLE_RESPONSE_SIGNATURE))) {
             serviceProviderDTO.setDoSignResponse(true);
         }

@@ -18,6 +18,7 @@
 
 package org.wso2.carbon.identity.sso.saml.ui;
 
+import org.wso2.carbon.identity.sso.saml.common.SAMLSSOProviderConstants;
 import org.wso2.carbon.identity.sso.saml.stub.types.SAMLSSOServiceProviderDTO;
 
 import java.util.ArrayList;

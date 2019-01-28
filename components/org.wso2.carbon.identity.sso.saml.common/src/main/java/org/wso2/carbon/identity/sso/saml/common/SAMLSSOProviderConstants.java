@@ -62,8 +62,9 @@ public class SAMLSSOProviderConstants {
 
     public static final String LOGIN_PAGE = "customLoginPage";
 
-    //Front Channel Logout Methods
-
+//    //Front Channel Logout Methods
+//    public static final String ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING = "HTTPRedirectBinding";
+//    public static final String ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING = "HTTPPostBinding";
 
     private SAMLSSOProviderConstants() {
     }
