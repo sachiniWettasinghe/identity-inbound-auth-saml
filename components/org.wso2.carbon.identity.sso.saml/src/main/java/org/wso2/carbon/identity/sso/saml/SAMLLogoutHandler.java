@@ -59,11 +59,11 @@ public class SAMLLogoutHandler extends AbstractEventHandler {
                     issuer = this.getIssuerFromContext(event);
                 }
 
-//                try {
-//                    samlSSOService.doSingleLogout(samlssoTokenId, issuer);
-//                } catch (IdentityException e) {
-//                    log.error("Error while SAML Logout Listener is doing single logout .", e);
-//                }
+                try {
+                    samlSSOService.doSingleLogout(samlssoTokenId, issuer);
+                } catch (IdentityException e) {
+                    log.error("Error while SAML Logout Listener is doing single logout .", e);
+                }
             } else {
                 if (log.isDebugEnabled()) {
                     AuthenticationContext context = (AuthenticationContext) event.getEventProperties().

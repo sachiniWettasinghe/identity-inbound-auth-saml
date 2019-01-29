@@ -2193,4 +2193,23 @@ public class SAMLSSOUtil {
         return false;
     }
 
+    /**
+     * Decoding the logout request extracted from the query string.
+     *
+     * @param logoutRequest Logout request string.
+     * @return Logout request XML object.
+     * @throws IdentityException Error in decoding.
+     */
+    public static XMLObject decodeSamlLogoutRequest(String logoutRequest) throws IdentityException {
+
+        XMLObject samlRequest;
+        try {
+            samlRequest = SAMLSSOUtil.unmarshall(SAMLSSOUtil.decode(logoutRequest));
+        } catch (IdentityException e) {
+            samlRequest = SAMLSSOUtil.unmarshall(SAMLSSOUtil.decodeForPost(logoutRequest));
+        }
+
+        return samlRequest;
+    }
+
 }

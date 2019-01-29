@@ -97,6 +97,10 @@ public class SAMLSSOConstants {
     public static final String CACHE_CONTROL_PARAM_KEY = "Cache-Control";
     public static final String CACHE_CONTROL_VALUE_NO_CACHE = "no-cache";
 
+    //Front Channel Logout Methods
+    public static final String ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING = "HTTPRedirectBinding";
+    public static final String ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING = "HTTPPostBinding";
+
     private SAMLSSOConstants() {
     }
 

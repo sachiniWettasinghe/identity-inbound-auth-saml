@@ -348,8 +348,8 @@ public class SAMLSSOProviderServlet extends HttpServlet {
             if (!isSuccessfullyLogout) {
                 // TODO : If the response is invalid, redirect the SP to an error page.
                 if (log.isDebugEnabled()) {
-                    log.debug("Logout response validation failed for logout response issuer: " +
-                            logoutResponseIssuer);
+                    log.debug("Single logout failed due to failure in logout response validation for logout " +
+                            "response issuer: " + logoutResponseIssuer);
                 }
             } else {
                 removeSPFromSession(frontChannelSLOParticipantInfo.getSessionIndex(), logoutResponseIssuer);
@@ -435,7 +435,7 @@ public class SAMLSSOProviderServlet extends HttpServlet {
                         originalIssuer.getSloResponseURL());
             }
         } else {
-            destination = originalIssuer.getAssertionConsumerUrl();
+            destination = originalIssuer.getDefaultAssertionConsumerUrl();
             if (log.isDebugEnabled()) {
                 log.debug("Destination of the logout response is set to the ACS URL of the SP: " +
                         originalIssuer.getAssertionConsumerUrl());
@@ -1257,10 +1257,7 @@ public class SAMLSSOProviderServlet extends HttpServlet {
             throws IOException, IdentityException {
 
         for (SAMLSSOServiceProviderDO entry : samlssoServiceProviderDOList) {
-            // TODO : UI configuration to enable Front-Channel SLO for SPs.
-            boolean isFrontChannelSLOEnabled = true;
-            //check entry.isFrontChannelSLOEnabled()
-            if (isFrontChannelSLOEnabled) {
+            if (entry.isDoFrontChannelLogout()) {
                 doFrontChannelSLO(response, entry, sessionIndex, originalLogoutRequestIssuer,
                         originalIssuerLogoutRequestId, isIdPInitSLO, relayState, returnToURL);
                 break;
@@ -1788,9 +1785,8 @@ public class SAMLSSOProviderServlet extends HttpServlet {
         storeFrontChannelSLOParticipantInfo(samlssoServiceProviderDO, originalLogoutRequestIssuer, logoutRequest,
                 originalIssuerLogoutRequestId, sessionIndex, isIdPInitSLO, relayState, returnToURL);
 
-        // TODO: UI configuration to check for the binding and filter.
-        boolean isPostBindingEnabled = true;
-        if (isPostBindingEnabled) {
+        if (SAMLSSOConstants.ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING.
+                equals(samlssoServiceProviderDO.getFrontChannelLogoutMethod())) {
             sendPostRequest(response, samlssoServiceProviderDO, logoutRequest);
         } else {
             String redirectUrl = createHttpQueryStringForRedirect(logoutRequest, samlssoServiceProviderDO);
@@ -1875,7 +1871,7 @@ public class SAMLSSOProviderServlet extends HttpServlet {
     private String extractLogoutRequestId(HttpServletRequest request) throws IdentityException {
 
         String initialSamlLogoutRequest = request.getParameter(SAMLSSOConstants.SAML_REQUEST);
-        XMLObject samlRequest = SAMLSSOUtil.unmarshall(SAMLSSOUtil.decode(initialSamlLogoutRequest));
+        XMLObject samlRequest = SAMLSSOUtil.decodeSamlLogoutRequest(initialSamlLogoutRequest);
 
         String initialLogoutRequestId = null;
         if (samlRequest instanceof LogoutRequestImpl) {
@@ -1904,7 +1900,7 @@ public class SAMLSSOProviderServlet extends HttpServlet {
             sessionIndex = ssoSessionPersistenceManager.getSessionIndexFromTokenId(sessionId);
         } else {
             String initialSamlLogoutRequest = request.getParameter(SAMLSSOConstants.SAML_REQUEST);
-            XMLObject samlRequest = SAMLSSOUtil.unmarshall(SAMLSSOUtil.decode(initialSamlLogoutRequest));
+            XMLObject samlRequest = SAMLSSOUtil.decodeSamlLogoutRequest(initialSamlLogoutRequest);
 
             if (samlRequest instanceof LogoutRequestImpl) {
                 sessionIndex = ((LogoutRequestImpl) samlRequest).getSessionIndexes().size() > 0 ?
