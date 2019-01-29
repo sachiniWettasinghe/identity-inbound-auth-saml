@@ -215,6 +215,7 @@ public class SSOSessionPersistenceManager {
                     }
                 }
             } else {
+                // Remove session participants in IdP initiated back-channel SLO.
                 removeBackChannelSLOEnabledSPs(cacheEntry);
             }
 
@@ -244,7 +245,7 @@ public class SSOSessionPersistenceManager {
         for (String sloSupportedIssuer : sloSupportedIssuers) {
             cacheEntry.getSessionInfoData().removeServiceProvider(sloSupportedIssuer);
             if (log.isDebugEnabled()) {
-                log.debug("Removed SLO supported service provider from session info data  with name "
+                log.debug("Removed back-channel SLO supported service provider from session info data with name "
                         + sloSupportedIssuer);
             }
         }

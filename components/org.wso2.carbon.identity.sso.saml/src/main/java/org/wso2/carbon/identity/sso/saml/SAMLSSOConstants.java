@@ -101,6 +101,8 @@ public class SAMLSSOConstants {
     public static final String ENABLE_FRONT_CHANNEL_HTTP_REDIRECT_BINDING = "HTTPRedirectBinding";
     public static final String ENABLE_FRONT_CHANNEL_HTTP_POST_BINDING = "HTTPPostBinding";
 
+    public static final String IS_POST = "isPost";
+
     private SAMLSSOConstants() {
     }
 
