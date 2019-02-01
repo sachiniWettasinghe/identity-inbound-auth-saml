@@ -234,14 +234,14 @@ public class SSOSessionPersistenceManager {
     public static void removeBackChannelSLOEnabledSPs(SAMLSSOParticipantCacheEntry cacheEntry) {
 
         Set<String> sloSupportedIssuers = new HashSet<String>();
-        //Filter out service providers which enabled the single logout and back-channel logout.
+        // Filter out service providers which enabled the single logout and back-channel logout.
         for (Map.Entry<String, SAMLSSOServiceProviderDO> entry : cacheEntry.getSessionInfoData().
                 getServiceProviderList().entrySet()) {
             if (entry.getValue().isDoSingleLogout() && !entry.getValue().isDoFrontChannelLogout()) {
                 sloSupportedIssuers.add(entry.getKey());
             }
         }
-        //Remove service providers which enabled the single logout and back-channel logout.
+        // Remove service providers which enabled the single logout and back-channel logout.
         for (String sloSupportedIssuer : sloSupportedIssuers) {
             cacheEntry.getSessionInfoData().removeServiceProvider(sloSupportedIssuer);
             if (log.isDebugEnabled()) {
